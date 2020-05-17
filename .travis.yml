@@ -1,11 +1,11 @@
 services:
   - docker
 
-before_install:
-  - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
+#before_install:
+#  - pip install --user awscli
+#  - export PATH=$PATH:$HOME/.local/bin
 script:
-  - docker build -t chrwolff/udagram-api udagram-api
+  - (cd udagram-api && docker build -t chrwolff/udagram-api .)
 #  - eval $(aws ecr get-login --region eu-west-1)
 #  - docker tag org/web:latest 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
 #  - docker push 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest

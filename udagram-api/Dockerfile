@@ -1,11 +1,13 @@
 # Stage 1: Transpile from typescript
-FROM node:slim AS build
+FROM node:latest AS build
+COPY . /build/
+WORKDIR /build/
 RUN npm install
 RUN npm run tsc
 
 # Stage 2: Copy folders and run the server
-FROM node:latest
-COPY --from=build /www .
-COPY --from=build /node_modules .
-EXPOSE 8080
-CMD ["node", "/www/server.js"]
+FROM node:slim
+COPY --from=build /build/www/ /www/
+COPY --from=build /build/node_modules/ /node_modules/
+WORKDIR /www/
+CMD ["node", "server.js"]
