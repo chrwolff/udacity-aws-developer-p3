@@ -5,7 +5,12 @@ services:
 #  - pip install --user awscli
 #  - export PATH=$PATH:$HOME/.local/bin
 script:
-  - (cd udagram-api && docker build -t chrwolff/udagram-api .)
+  - docker --version
+  - export DOCKER_API_TAG=chrwolff/udagram-api
+  - (cd udagram-api && docker build -t $DOCKER_API_TAG .)
 #  - eval $(aws ecr get-login --region eu-west-1)
 #  - docker tag org/web:latest 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
 #  - docker push 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push $DOCKER_API_TAG
