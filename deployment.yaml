@@ -1,17 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram-pod
+  name: udagram
   labels:
-    app: udagram-pod
+    app: udagram
 spec:
   replicas: 1
+  selector: 
+    matchLabels:
+      app: udagram
+  template:
+    metadata:
+      labels:
+        app: udagram
     spec:
       containers:
-      - name: udagram-api
+      - name: udagram
         image: chrwolff/udagram-api
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         env:
         - name: DB_USERNAME
           value: "dbadmin"
@@ -37,3 +44,5 @@ spec:
           value: "10"
         - name: IMAGE_TRANSFORM_HOST
           value: "localhost:8082"
+        - name: PORT
+          value: "80"
