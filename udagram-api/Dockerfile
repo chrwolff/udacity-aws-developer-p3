@@ -3,7 +3,7 @@ FROM node:13 AS build
 
 WORKDIR /build/
 # Copy context to build dir
-COPY . /
+COPY . ./
 
 RUN npm install
 RUN npm run tsc
