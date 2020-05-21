@@ -1,13 +1,10 @@
 FROM node:13 AS build
-
-ARG API_HOST_URL
-
 WORKDIR /build/
 COPY . ./
 
 RUN npm install
+RUN npm install -g @angular/cli
 RUN ng build --prod
 
-FROM scratch
-
-COPY --from=build /build/www/ /www/
+FROM nginx
+COPY --from=build /build/www/ /usr/share/nginx/html
