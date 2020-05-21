@@ -8,4 +8,4 @@ RUN ng build --prod
 
 FROM nginx
 COPY --from=build /build/www/ /usr/share/nginx/html
-COPY --from=build /build/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /build/nginx-default.conf /etc/nginx/conf.d/default.conf
