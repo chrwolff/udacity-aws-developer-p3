@@ -6,11 +6,18 @@ services:
 #  - export PATH=$PATH:$HOME/.local/bin
 script:
   - docker --version
-  - export DOCKER_API_TAG="chrwolff/udagram-api"
+  - DOCKER_API_TAG="chrwolff/udagram-api"
   - (cd udagram-api && docker build -t $DOCKER_API_TAG .)
 #  - eval $(aws ecr get-login --region eu-west-1)
 #  - docker tag org/web:latest 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
 #  - docker push 123456789000.dkr.ecr.eu-west-1.amazonaws.com/org/web:latest
+
+  - (cd udagram-frontend && DOCKER_FRONTEND_TAG=$(docker build --build-arg API_HOST_URL .))
+  - DOCKER_FRONTEND_IMAGE=$(docker create $DOCKER_FRONTEND_TAG true)
+  - docker export "$DOCKER_FRONTEND_IMAGE" | tar -x -C .
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push $DOCKER_API_TAG
+  - kubectl apply -f deployment.yml
+  - kubectl apply -f service.yml
+  - aws s3 sync www s3://udagram-frontend-chrwolff-dev/
