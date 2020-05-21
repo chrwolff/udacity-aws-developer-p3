@@ -13,5 +13,5 @@ export const config = {
   'port': process.env.PORT || 8080, // default port to listen
   'jwt': {
     'secret': process.env.JWT_SECRET,
-  },
+  }
 };
