@@ -15,10 +15,10 @@ spec:
         app: udagram
     spec:
       containers:
-      - name: udagram
+      - name: udagram-api
         image: chrwolff/udagram-api
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         env:
         - name: DB_USERNAME
           value: "dbadmin"
@@ -39,10 +39,14 @@ spec:
         - name: JWT_SECRET
           value: "Whazup?"
         - name: URL
-          value: "http://localhost:8100"
-        - name: SALT_ROUNDS
-          value: "10"
-        - name: IMAGE_TRANSFORM_HOST
-          value: "localhost:8082"
+          value: "http://localhost:80"
         - name: PORT
-          value: "80"
+          value: "8080"
+        - name: ACCESS_KEY_ID
+          value: AKIAV4SGLYP6FLWLN3HC
+        - name: SECRET_ACCESS_KEY
+          value: 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
+      - name: udagram-frontend
+        image: chrwolff/udagram-frontend
+        ports:
+        - containerPort: 80
