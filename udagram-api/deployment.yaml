@@ -1,25 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram
-  labels:
-    app: udagram
+  name: udagram-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: udagram
+      app: udagram-api
   template:
     metadata:
       name: udagram-api
       labels:
-        app: udagram
+        app: udagram-api
     spec:
       containers:
-        - name: udagram-api
-          image: chrwolff/udagram-api
+        - image: chrwolff/udagram-api
+          name: udagram-api
           ports:
-            - containerPort: 8080
+            - name: http
+              containerPort: 8080
           env:
             - name: DB_USERNAME
               value: "dbadmin"
@@ -40,7 +39,7 @@ spec:
             - name: JWT_SECRET
               value: "Whazup?"
             - name: URL
-              value: "http://localhost:80"
+              value: "http://udagram-frontend:80"
             - name: PORT
               value: "8080"
             - name: ACCESS_KEY_ID
