@@ -4,7 +4,7 @@ services:
 script:
   - docker --version
   - (cd udagram-feed-api && docker build -t $DOCKER_FEED_API_TAG .)
-  - (cd udagram-feed-api && docker build -t $DOCKER_USERS_API_TAG .)
+  - (cd udagram-users-api && docker build -t $DOCKER_USERS_API_TAG .)
   - (cd udagram-frontend && docker build -t $DOCKER_FRONTEND_TAG .)
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
