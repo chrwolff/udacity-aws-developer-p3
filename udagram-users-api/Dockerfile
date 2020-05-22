@@ -14,6 +14,6 @@ COPY --from=build /build/www/ /www/
 COPY --from=build /build/node_modules/ /node_modules/
 WORKDIR /www/
 
-EXPOSE 8081
+EXPOSE 8080
 
 CMD ["node", "server.js"]
