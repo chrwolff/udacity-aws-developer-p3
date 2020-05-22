@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram-api
+  name: udagram-feed-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: udagram-api
+      app: udagram-feed-api
   template:
     metadata:
-      name: udagram-api
+      name: udagram-feed-api
       labels:
-        app: udagram-api
+        app: udagram-feed-api
     spec:
       containers:
-        - image: chrwolff/udagram-api
-          name: udagram-api
+        - image: chrwolff/udagram-feed-api
+          name: udagram-feed-api
           ports:
             - name: http
               containerPort: 8080

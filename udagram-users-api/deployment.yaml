@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-users-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udagram-users-api
+  template:
+    metadata:
+      name: udagram-users-api
+      labels:
+        app: udagram-users-api
+    spec:
+      containers:
+        - image: chrwolff/udagram-users-api
+          name: udagram-users-api
+          ports:
+            - name: http
+              containerPort: 8081
+          env:
+            - name: DB_USERNAME
+              value: "dbadmin"
+            - name: DB_PASSWORD
+              value: "Kwisatz#01"
+            - name: DB_NAME
+              value: "udagramchrwolffdev"
+            - name: DB_HOST
+              value: "udagramchrwolffdev.ct5cseid54jy.eu-central-1.rds.amazonaws.com"
+            - name: DB_DIALECT
+              value: "postgres"
+            - name: JWT_SECRET
+              value: "Whazup?"
+            - name: URL
+              value: "http://udagram-frontend:80"
+            - name: PORT
+              value: "8081"
