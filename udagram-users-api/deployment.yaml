@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram-api
+  name: udagram-users-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: udagram-api
+      app: udagram-users-api
   template:
     metadata:
-      name: udagram-api
+      name: udagram-users-api
       labels:
-        app: udagram-api
+        app: udagram-users-api
     spec:
       containers:
-        - image: chrwolff/udagram-api
-          name: udagram-api
+        - image: chrwolff/udagram-users-api
+          name: udagram-users-api
           ports:
             - name: http
               containerPort: 8080
@@ -30,19 +30,9 @@ spec:
               value: "udagramchrwolffdev.ct5cseid54jy.eu-central-1.rds.amazonaws.com"
             - name: DB_DIALECT
               value: "postgres"
-            - name: AWS_REGION
-              value: "eu-central-1"
-            - name: AWS_PROFILE
-              value: "default"
-            - name: AWS_MEDIA_BUCKET
-              value: "udagram-chrwolff-dev"
             - name: JWT_SECRET
               value: "Whazup?"
             - name: URL
               value: "http://udagram-frontend:80"
             - name: PORT
               value: "8080"
-            - name: ACCESS_KEY_ID
-              value: AKIAV4SGLYP6FLWLN3HC
-            - name: SECRET_ACCESS_KEY
-              value: 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
