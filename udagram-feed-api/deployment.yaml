@@ -43,6 +43,6 @@ spec:
             - name: PORT
               value: "8080"
             - name: ACCESS_KEY_ID
-              value: AKIAV4SGLYP6FLWLN3HC
+              value: AKIAV4SGLYP6N4KIF3NX
             - name: SECRET_ACCESS_KEY
-              value: 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
+              value: EMFB99UyypHk9gGJn9wRGadKA2cDA+t8jfv5iWXZ
