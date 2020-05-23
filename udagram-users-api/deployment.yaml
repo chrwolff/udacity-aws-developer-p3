@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-users-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: udagram-users-api
+  template:
+    metadata:
+      name: udagram-users-api
+      labels:
+        app: udagram-users-api
+    spec:
+      containers:
+        - image: chrwolff/udagram-users-api
+          name: udagram-users-api
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: udagram-secrets
+          env:
+            - name: DB_DIALECT
+              value: "postgres"
+            - name: URL
+              value: "http://udagram-frontend:80"
+            - name: PORT
+              value: "8080"
